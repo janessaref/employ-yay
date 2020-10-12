@@ -62,18 +62,23 @@ inquirer.prompt([{
     },
     {
         type: "input",
-        name: "engineergithub",
-        message: "What is your engineer's GitHub username?",
+        name: "intername",
+        message: "What is your intern's name?",
     },
     {
         type: "input",
-        name: "engineergithub",
-        message: "What is your engineer's GitHub username?",
+        name: "internid",
+        message: "What is your intern's ID?",
     },
     {
         type: "input",
-        name: "engineergithub",
-        message: "What is your engineer's GitHub username?",
+        name: "internemail",
+        message: "What is your intern's email?",
+    },
+    {
+        type: "input",
+        name: "internschool",
+        message: "What is your intern's school?",
     },
 ]);
 

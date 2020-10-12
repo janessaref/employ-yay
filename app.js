@@ -14,6 +14,69 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+inquirer.prompt([{
+        type: "input",
+        name: "managername",
+        message: "What is your manager's name?",
+    },
+    {
+        type: "input",
+        name: "managerid",
+        message: "What is your manager's ID?",
+    },
+    {
+        type: "input",
+        name: "manageremail",
+        message: "What is your manager's email address?",
+    },
+    {
+        type: "input",
+        name: "manageroffice",
+        message: "What is your manager's office number?",
+    },
+    {
+        type: "list",
+        name: "teammember",
+        message: "What type of team member would you like to add?",
+        choices: ["Engineer", "Intern", "I don't want to add any more team members"],
+    },
+    {
+        type: "input",
+        name: "engineer",
+        message: "What is your engineer's name?",
+    },
+    {
+        type: "input",
+        name: "engineerid",
+        message: "What is your engineer's ID?",
+    },
+    {
+        type: "input",
+        name: "engineeremail",
+        message: "What is your engineer's email address?",
+    },
+    {
+        type: "input",
+        name: "engineergithub",
+        message: "What is your engineer's GitHub username?",
+    },
+    {
+        type: "input",
+        name: "engineergithub",
+        message: "What is your engineer's GitHub username?",
+    },
+    {
+        type: "input",
+        name: "engineergithub",
+        message: "What is your engineer's GitHub username?",
+    },
+    {
+        type: "input",
+        name: "engineergithub",
+        message: "What is your engineer's GitHub username?",
+    },
+]);
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!

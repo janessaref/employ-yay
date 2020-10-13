@@ -15,12 +15,11 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 const teamArray = [];
-console.log(teamArray);
 
 function teamManager() {
     inquirer.prompt([{
             type: "input",
-            name: "Manager",
+            name: "managername",
             message: "What is your manager's name?",
         },
         {
@@ -38,8 +37,9 @@ function teamManager() {
             name: "manageroffice",
             message: "What is your manager's office number?",
         },
-    ]).then(function(managerInput) {
-        teamArray.push(managerInput);
+    ]).then(function(data) {
+        const manager = new Manager(data.managername, data.managerid, data.manageremail, data.manageroffice);
+        teamArray.push(manager);
         newEmployee();
     });
 
@@ -48,24 +48,30 @@ function teamManager() {
 function newEmployee() {
     inquirer.prompt([{
         type: "list",
-        name: "teamMember",
+        name: "teammember",
         message: "What type of team member would you like to add?",
         choices: ["Engineer", "Intern", "I don't want to add any more team members"],
     }, ]).then(function(data) {
-        if (data.teamMember === "Engineer") {
+        if (data.teammember === "Engineer") {
             engineerEmployee();
-        } else if (data.teamMember === "Intern") {
+        } else if (data.teammember === "Intern") {
             internEmployee();
         } else {
-            console.log(teamArray);
-        }
+            const finalOutput = render(teamArray);
+            fs.writeFile("output/team.html", finalOutput,
+                function(err) {
+                    if (err) throw err;
+                    console.log("Your team is ready!");
+                });
+
+        };
     });
 };
 
 function engineerEmployee() {
     inquirer.prompt([{
             type: "input",
-            name: "Engineer",
+            name: "engineername",
             message: "What is your engineer's name?",
         },
         {
@@ -83,8 +89,9 @@ function engineerEmployee() {
             name: "engineergithub",
             message: "What is your engineer's GitHub username?",
         },
-    ]).then(function(engineerInput) {
-        teamArray.push(engineerInput);
+    ]).then(function(data) {
+        const engineer = new Engineer(data.engineername, data.engineerid, data.engineeremail, data.engineergithub);
+        teamArray.push(engineer);
         newEmployee();
     });
 };
@@ -92,7 +99,7 @@ function engineerEmployee() {
 function internEmployee() {
     inquirer.prompt([{
             type: "input",
-            name: "Intern",
+            name: "internname",
             message: "What is your intern's name?",
         },
         {
@@ -110,11 +117,13 @@ function internEmployee() {
             name: "internschool",
             message: "What is your intern's school?",
         },
-    ]).then(function(internInput) {
-        teamArray.push(internInput);
+    ]).then(function(data) {
+        const intern = new Intern(data.internname, data.internid, data.internemail, data.internschool);
+        teamArray.push(intern);
         newEmployee();
     });
 };
+
 
 teamManager();
 

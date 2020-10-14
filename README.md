@@ -4,7 +4,7 @@ In this project, I’ve created an application that takes information about empl
 
 In this project, it has passed all the unit tests and utilizes Inquirer npm package to prompt the user the following information: Name, Email, ID and specific information based on their role in the company. This also uses Jest to run the tests in the application as well as the colorful questions with the Chalk npm package. All the dependencies are found in the package.json file.
 
-I'm still learning on how to use regular expressions so validating the email and the rest of the questions posed a challenge for me and I was only able to get the numbers validated but soon enough, I hope to incorporate this. I did enjoy using the Chalk library to create the colorful questions and I did enjoy doing my demo with references to Game of Thrones (warning for spoilers!).
+I'm still learning on how to use regular expressions so validating the email and the rest of the questions posed a challenge for me and I was only able to get the numbers validated but soon enough, I hope to incorporate this. I did enjoy using the Chalk library to create the colorful questions and I did enjoy doing my demo with references to Game of Thrones (warning for spoilers!). I added my own styling to this project with backgrounds and color coding. In the demo provided below at the [Usage](#usage), you will notice that the team profile generator was at its default styling and if you look at the section, [Images of Project](#images-of-project), I have updated the look of my application.
 
 
 ## Table of Contents
@@ -50,11 +50,11 @@ I'm still learning on how to use regular expressions so validating the email and
 
 ![gif](assets/employay.gif)
 
-## Image of Project
+## Images of Project
 
 Attached below is a picture of the application.
 
-![pic](assets/teamgenerator.png)
+![pic](assets/teamgeneratorNEW.png)
 ![pic](assets/emloyeequestions.png)
 
 ## Code Snippet

@@ -4,60 +4,130 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const chalk = require("chalk");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+// Empty array to collect all user input to be later rendered
 const teamArray = [];
 
+// prompt questions for a single manager, this is the  first function called when app.js is ran in the command line
 function teamManager() {
     inquirer.prompt([{
             type: "input",
             name: "managername",
-            message: "What is your manager's name?",
+            message: chalk.blue("What is your manager's name?"),
         },
         {
             type: "input",
             name: "managerid",
-            message: "What is your manager's ID?",
+            message: chalk.blue("What is your manager's ID?"),
+            // validates if the user's input is a number
             validate: function(value) {
                 const valid = !isNaN(parseInt(value));
-                return valid || "Please enter a valid number (Press the up and down arrow key to re-Enter value";
+                return valid || "Please enter a valid number";
             },
         },
         {
             type: "input",
             name: "manageremail",
-            message: "What is your manager's email address?",
+            message: chalk.blue("What is your manager's email address?"),
         },
         {
             type: "input",
             name: "manageroffice",
-            message: "What is your manager's office number?",
+            message: chalk.blue("What is your manager's office number?"),
             validate: function(value) {
                 const valid = !isNaN(parseInt(value));
-                return valid || "Please enter a valid number (Press the up and down arrow key to re-Enter value";
+                return valid || "Please enter a valid number";
             },
         },
     ]).then(function(data) {
         const manager = new Manager(data.managername, data.managerid, data.manageremail, data.manageroffice);
+        // pushes information about the manager to the empty array
         teamArray.push(manager);
         newEmployee();
     });
 
 };
+// function that runs if user chooses to add "Engineer" to the team
+function engineerEmployee() {
+    inquirer.prompt([{
+            type: "input",
+            name: "engineername",
+            message: chalk.green("What is your engineer's name?"),
+        },
+        {
+            type: "input",
+            name: "engineerid",
+            message: chalk.green("What is your engineer's ID?"),
+            validate: function(value) {
+                const valid = !isNaN(parseInt(value));
+                return valid || "Please enter a valid number";
+            },
+        },
+        {
+            type: "input",
+            name: "engineeremail",
+            message: chalk.green("What is your engineer's email address?"),
+        },
+        {
+            type: "input",
+            name: "engineergithub",
+            message: chalk.green("What is your engineer's GitHub username?"),
+        },
+    ]).then(function(data) {
+        const engineer = new Engineer(data.engineername, data.engineerid, data.engineeremail, data.engineergithub);
+        teamArray.push(engineer);
+        newEmployee();
+    });
+};
 
+// function that runs if user chooses to add "Intern" to the team
+function internEmployee() {
+    inquirer.prompt([{
+            type: "input",
+            name: "internname",
+            message: chalk.cyan("What is your intern's name?"),
+        },
+        {
+            type: "input",
+            name: "internid",
+            message: chalk.cyan("What is your intern's ID?"),
+            validate: function(value) {
+                const valid = !isNaN(parseInt(value));
+                return valid || "Please enter a valid number";
+            },
+        },
+        {
+            type: "input",
+            name: "internemail",
+            message: chalk.cyan("What is your intern's email?"),
+        },
+        {
+            type: "input",
+            name: "internschool",
+            message: chalk.cyan("What is your intern's school?"),
+        },
+    ]).then(function(data) {
+        const intern = new Intern(data.internname, data.internid, data.internemail, data.internschool);
+        teamArray.push(intern);
+        newEmployee();
+    });
+};
+
+// function being called to prompt user if they want additional members in the team such as engineers and interns. If not, the prompts will stop and it will render and write the information into a file in the output directory named team.html
 function newEmployee() {
     inquirer.prompt([{
         type: "list",
         name: "teammember",
-        message: "What type of team member would you like to add?",
+        message: chalk.magenta("What type of team member would you like to add?"),
         choices: ["Engineer", "Intern", "I don't want to add any more team members"],
     }, ]).then(function(data) {
         if (data.teammember === "Engineer") {
@@ -69,74 +139,10 @@ function newEmployee() {
             fs.writeFile("output/team.html", finalOutput,
                 function(err) {
                     if (err) throw err;
-                    console.log("Your team is ready!");
+
+                    console.log(chalk.yellow("-".repeat(60) + "\n\n Your team is ready!"));
                 });
-
         };
-    });
-};
-
-function engineerEmployee() {
-    inquirer.prompt([{
-            type: "input",
-            name: "engineername",
-            message: "What is your engineer's name?",
-        },
-        {
-            type: "input",
-            name: "engineerid",
-            message: "What is your engineer's ID?",
-            validate: function(value) {
-                const valid = !isNaN(parseInt(value));
-                return valid || "Please enter a valid number (Press the up and down arrow key to re-Enter value";
-            },
-        },
-        {
-            type: "input",
-            name: "engineeremail",
-            message: "What is your engineer's email address?",
-        },
-        {
-            type: "input",
-            name: "engineergithub",
-            message: "What is your engineer's GitHub username?",
-        },
-    ]).then(function(data) {
-        const engineer = new Engineer(data.engineername, data.engineerid, data.engineeremail, data.engineergithub);
-        teamArray.push(engineer);
-        newEmployee();
-    });
-};
-
-function internEmployee() {
-    inquirer.prompt([{
-            type: "input",
-            name: "internname",
-            message: "What is your intern's name?",
-        },
-        {
-            type: "input",
-            name: "internid",
-            message: "What is your intern's ID?",
-            validate: function(value) {
-                const valid = !isNaN(parseInt(value));
-                return valid || "Please enter a valid number (Press the up and down arrow key to re-Enter value";
-            },
-        },
-        {
-            type: "input",
-            name: "internemail",
-            message: "What is your intern's email?",
-        },
-        {
-            type: "input",
-            name: "internschool",
-            message: "What is your intern's school?",
-        },
-    ]).then(function(data) {
-        const intern = new Intern(data.internname, data.internid, data.internemail, data.internschool);
-        teamArray.push(intern);
-        newEmployee();
     });
 };
 

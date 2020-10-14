@@ -26,6 +26,10 @@ function teamManager() {
             type: "input",
             name: "managerid",
             message: "What is your manager's ID?",
+            validate: function(value) {
+                const valid = !isNaN(parseInt(value));
+                return valid || "Please enter a valid number (Press the up and down arrow key to re-Enter value";
+            },
         },
         {
             type: "input",
@@ -36,6 +40,10 @@ function teamManager() {
             type: "input",
             name: "manageroffice",
             message: "What is your manager's office number?",
+            validate: function(value) {
+                const valid = !isNaN(parseInt(value));
+                return valid || "Please enter a valid number (Press the up and down arrow key to re-Enter value";
+            },
         },
     ]).then(function(data) {
         const manager = new Manager(data.managername, data.managerid, data.manageremail, data.manageroffice);
@@ -78,6 +86,10 @@ function engineerEmployee() {
             type: "input",
             name: "engineerid",
             message: "What is your engineer's ID?",
+            validate: function(value) {
+                const valid = !isNaN(parseInt(value));
+                return valid || "Please enter a valid number (Press the up and down arrow key to re-Enter value";
+            },
         },
         {
             type: "input",
@@ -106,6 +118,10 @@ function internEmployee() {
             type: "input",
             name: "internid",
             message: "What is your intern's ID?",
+            validate: function(value) {
+                const valid = !isNaN(parseInt(value));
+                return valid || "Please enter a valid number (Press the up and down arrow key to re-Enter value";
+            },
         },
         {
             type: "input",
@@ -124,41 +140,7 @@ function internEmployee() {
     });
 };
 
-
 teamManager();
-
-
-
-//     {
-//         type: "input",
-//         name: "intername",
-//         message: "What is your intern's name?",
-//     },
-//     {
-//         type: "input",
-//         name: "internid",
-//         message: "What is your intern's ID?",
-//     },
-//     {
-//         type: "input",
-//         name: "internemail",
-//         message: "What is your intern's email?",
-//     },
-//     {
-//         type: "input",
-//         name: "internschool",
-//         message: "What is your intern's school?",
-//     },
-// ]);
-
-
-
-// function Manager(){
-//     inquirer.prompt(managerEmployee)
-//     .then(function(managerEmployee) {
-
-//     }
-// }
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

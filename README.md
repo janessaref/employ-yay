@@ -52,7 +52,7 @@ I'm still learning on how to use regular expressions so validating the email and
 
 ## Images of Project
 
-Attached below is a picture of the application.
+Attached below is a picture of the application and the employee questions using the Chalk and Inquier libraries.
 
 ![pic](assets/teamgeneratorNEW.png)
 ![pic](assets/emloyeequestions.png)
